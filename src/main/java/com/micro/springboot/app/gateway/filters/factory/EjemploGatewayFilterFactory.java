@@ -1,5 +1,7 @@
 package com.micro.springboot.app.gateway.filters.factory;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -38,13 +40,29 @@ public class EjemploGatewayFilterFactory extends AbstractGatewayFilterFactory<Ej
 						log.info("Ejecutando post gateway filter factory: " + config.mensaje);						
 					}));
 		};
+	}	
+	
+	//Metodo de la interfaz GateWayFilterFactory que permite establecer el nombre del filtro
+	@Override
+	public String name() {
+		// TODO Auto-generated method stub
+		return "EjemploFiltroProductos";
 	}
 	
+
+	//Metodo de interfaz ShortcutConfigurable para definir el orden de argumentos
+	//de una linea configurados en el yml, especificando el nombre de los campos/argumentos
+	@Override
+	public List<String> shortcutFieldOrder() {
+		return Arrays.asList("mensaje","cookieNombre","cookieNombre");
+	}
+
+
 	public static class Configuration {
 		
 		private String mensaje;
-		private String cookieValor;
 		private String cookieNombre;
+		private String cookieValor;
 		
 		public String getMensaje() {
 			return mensaje;

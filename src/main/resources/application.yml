@@ -8,11 +8,7 @@ spring:
           - Path=/api/v2/productos/**
         filters:
           - StripPrefix=3
-          - name: Ejemplo
-            args:
-              mensaje: Hola mi mensaje personalizado
-              cookieNombre: marca
-              cookieValor: Xiaomi
+          - EjemploFiltroProductos=Hola mi mensaje personalizado, marca, Xiaomi
       - id: servicio-items
         uri: lb://servicio-items
         predicates:
