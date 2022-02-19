@@ -15,3 +15,9 @@ spring:
           - Path=/api/v2/items/**
         filters:
           - StripPrefix=3
+          - AddRequestHeader=token-request,abcdef
+          - AddRequestParameter=usuario, pepito
+          - AddResponseHeader=token-response, lkjhgxx
+          - SetResponseHeader=Content-Type, application/json
+          
+          
