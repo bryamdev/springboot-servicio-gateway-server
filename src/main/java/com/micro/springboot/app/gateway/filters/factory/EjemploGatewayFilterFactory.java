@@ -40,7 +40,7 @@ public class EjemploGatewayFilterFactory extends AbstractGatewayFilterFactory<Ej
 						
 						log.info("Ejecutando post gateway filter factory: " + config.mensaje);						
 					}));
-		}, 2);
+		}, 4);
 	}	
 	
 	//Metodo de la interfaz GateWayFilterFactory que permite establecer el nombre del filtro

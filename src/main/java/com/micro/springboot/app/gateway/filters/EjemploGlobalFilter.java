@@ -51,7 +51,7 @@ public class EjemploGlobalFilter implements GlobalFilter, Ordered {
 	//El orden de ejecucion es FIFO, -1 especifica que es el primero en pre y ultimo en post
 	@Override
 	public int getOrder() {
-		return 1;
+		return 2;
 	}
 
 	

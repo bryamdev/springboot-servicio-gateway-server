@@ -4,8 +4,14 @@ spring:
       routes:
       - id: servicio-productos
         uri: lb://servicio-productos
+        #los predicates son restricciones que debe cumplir el request para ser enrutado y porterior procesado
         predicates:
           - Path=/api/v2/productos/**
+          #- Header= token, \d+
+          #- Header= Content-Type, application/json
+          #- Method= GET, POST
+          #- Query= color
+          #- Cookie= marca, ford
         filters:
           - StripPrefix=3
           - EjemploFiltroProductos=Hola mi mensaje personalizado, marca, Xiaomi
@@ -16,8 +22,8 @@ spring:
         filters:
           - StripPrefix=3
           - AddRequestHeader=token-request,abcdef
-          - AddRequestParameter=usuario, pepito
           - AddResponseHeader=token-response, lkjhgxx
           - SetResponseHeader=Content-Type, application/json
+          - SetResponseHeader=Content-Type2, application/json
           
           
