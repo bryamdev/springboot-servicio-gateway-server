@@ -1,3 +1,25 @@
+#configuracion del Circuit Braker de Resilience4J para Productos
+resilience4j:
+  circuitbreaker:
+    configs:
+      defecto:
+        sliding-window-size: 6
+        failure-rate-threshold: 50
+        wait-duration-in-open-state: 20s
+        permitted-number-of-calls-in-half-open-state: 4
+        slow-call-rate-threshold: 50
+        slow-call-duration-threshold: 2s        
+    instances:
+      productos:
+        base-config: defecto        
+  timelimiter:
+    configs:
+      defecto:
+        timeout-duration: 2s
+    instances:
+      productos:
+        base-config: defecto
+
 spring:
   cloud:
     gateway:
@@ -13,6 +35,14 @@ spring:
           #- Query= color
           #- Cookie= marca, ford
         filters:
+          #filtro para agregar TimeLimiter de Resilience4J para micro productos
+          #- CircuitBreaker=productos
+          - name: CircuitBreaker
+            args:
+              name: productos
+              #toma los responses con ese status (Excepcion de productos) para que lo tome el Circuit Braker
+              statusCodes: 500
+              fallbackUri: forward:/api/v2/items/ver/9/cantidad/5
           - StripPrefix=3
           - EjemploFiltroProductos=Hola mi mensaje personalizado, marca, Xiaomi
       - id: servicio-items
@@ -21,9 +51,9 @@ spring:
           - Path=/api/v2/items/**
         filters:
           - StripPrefix=3
-          - AddRequestHeader=token-request,abcdef
-          - AddResponseHeader=token-response, lkjhgxx
-          - SetResponseHeader=Content-Type, application/json
-          - SetResponseHeader=Content-Type2, application/json
+          #- AddRequestHeader=token-request,abcdef
+          #- AddResponseHeader=token-response, lkjhgxx
+          #- SetResponseHeader=Content-Type, application/json
+          #- SetResponseHeader=Content-Type2, application/json
           
           
