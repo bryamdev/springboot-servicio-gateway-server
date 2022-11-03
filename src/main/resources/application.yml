@@ -55,5 +55,17 @@ spring:
           #- AddResponseHeader=token-response, lkjhgxx
           #- SetResponseHeader=Content-Type, application/json
           #- SetResponseHeader=Content-Type2, application/json
+      - id: servicio-usuarios
+        uri: lb://servicio-usuarios
+        predicates:
+          - Path=/api/v2/oauth/**
+        filters:
+          - StripPrefix=3
+      - id: servicio-items
+        uri: lb://servicio-items
+        predicates:
+          - Path=/api/v2/usuarios/**
+        filters:
+          - StripPrefix=3
           
           
