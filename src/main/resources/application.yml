@@ -58,13 +58,13 @@ spring:
       - id: servicio-usuarios
         uri: lb://servicio-usuarios
         predicates:
-          - Path=/api/v2/oauth/**
+          - Path=/api/v2/usuarios/**
         filters:
           - StripPrefix=3
-      - id: servicio-items
-        uri: lb://servicio-items
+      - id: servicio-oauth
+        uri: lb://servicio-oauth
         predicates:
-          - Path=/api/v2/usuarios/**
+          - Path=/api/v2/oauth/**
         filters:
           - StripPrefix=3
           
